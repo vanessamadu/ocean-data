@@ -2,7 +2,7 @@ import json
 import os
 import pandas as pd
 
-def update_json_file(filename, new_data):
+def update_json_file(filename:str, new_data:list):
     if os.path.exists(filename):
         with open(filename, "r") as file:
             existing_data = json.load(file)
@@ -16,7 +16,7 @@ def update_json_file(filename, new_data):
     with open(filename, "w") as file:
         json.dump(existing_data, file, indent=4)
 
-def read_json_to_dataframe(filename):
+def read_json_to_dataframe(filename:str):
     with open(filename, "r") as file:
         data = json.load(file)
     
