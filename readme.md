@@ -1,7 +1,7 @@
 Data Format:
 
 ```python
-new_dataset = [{
+dataset = [{
     "Data Set Name": name
     "Owner/Organisation": owner,
     "Spatial Resolution": res_space,

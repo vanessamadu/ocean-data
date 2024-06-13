@@ -1,11 +1,6 @@
 from json_functions import read_json_to_dataframe, update_json_file
-import os
+from data_module_list import *
 
-def load_metadata(filename):
-    root_path = os.path.dirname(__file__)
-    file_path = os.path.join(root_path, 'metadata\\%s'%filename)
-
-    with open(file_path, 'r') as file:
-        return(file.read()) 
-
-print(load_metadata("data.py"))
+data = metadata.data1.dataset
+filename = "ocean_data.json"
+update_json_file(filename,data)
