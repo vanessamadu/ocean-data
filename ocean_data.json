@@ -1,1 +1,719 @@
-{}
+[
+    {
+        "Data Set Name": "Global Ocean Gridded L4 Sea Surface Heights And Derived Variables Reprocessed 1993 Ongoing",
+        "Owner/Organisation": "Copernicus Marine Service",
+        "Spatial Resolution": "0.25 degrees \u00d7 0.25 degrees",
+        "Temporal Resolution": [
+            "Daily",
+            "Monthly"
+        ],
+        "Spatial Extent": {
+            "oceans": [
+                "global",
+                "arctic"
+            ],
+            "lat": [
+                -89.87,
+                89.88
+            ],
+            "lon": [
+                -179.87,
+                179.88
+            ]
+        },
+        "Temporal Extent": [
+            "1 Jan 1993",
+            "8 Sep 2023"
+        ],
+        "Measured Quantities": [
+            "Sea surface height above geoid (SSH)",
+            "Sea surface height above sea level (SSH)",
+            "Surface geostrophic eastward sea water velocity assuming sea level for geoid (UV)",
+            "Surface geostrophic northward sea water velocity (UV)",
+            "Surface geostrophic eastward sea water velocity (UV)",
+            "Surface geostrophic northward sea water velocity assuming sea level for geoid (UV)"
+        ],
+        "Precision": "Not specified",
+        "Missing Values/Outliers Protocol": "Not specified",
+        "Data Format": "NetCDF-4",
+        "Processing Level": "Level 4",
+        "Documentation": [
+            "User Manual",
+            "Quality Information Document",
+            "Synthesis Quality Overview",
+            "Licence",
+            "How to cite"
+        ],
+        "Citation": "https://doi.org/10.48670/moi-00148",
+        "Data File Type": "Grid",
+        "Date Accessed": "30 November 2023",
+        "Accessed From": "https://doi.org/10.48670/moi-00148",
+        "Additional Notes/Links": [
+            "This product is processed by the DUACS multimission altimeter data processing system.",
+            "Part of the processing is fitted to the Global ocean.",
+            "The Copernicus Marine Viewer (MyOcean Pro) allows exploration of the catalogue online with multi-projection maps and graphs vs. time, elevation, and/or distance.",
+            "MyOcean Viewer offers high-quality information free of charge and is ad-free.",
+            "New colormaps consider colorblind viewers and avoid visual distortion induced by some popular colormaps."
+        ]
+    },
+    {
+        "Data Set Name": "ODYSSEA Global Sea Surface Temperature Gridded Level 4 Daily Multi-Sensor Observations",
+        "Owner/Organisation": "Copernicus Marine Service",
+        "Spatial Resolution": "0.1 degrees \u00d7 0.1 degrees",
+        "Temporal Resolution": [
+            "Daily"
+        ],
+        "Spatial Extent": {
+            "oceans": [
+                "global"
+            ],
+            "lat": [
+                -79.95,
+                79.95
+            ],
+            "lon": [
+                -179.95,
+                179.95
+            ]
+        },
+        "Temporal Extent": [
+            "1 Jan 2021",
+            "18 Jun 2024"
+        ],
+        "Measured Quantities": [
+            "Sea surface temperature (SST)"
+        ],
+        "Precision": "Not specified",
+        "Missing Values/Outliers Protocol": "Not specified",
+        "Data Format": "NetCDF-4",
+        "Processing Level": "Level 4",
+        "Documentation": [
+            "User Manual",
+            "Quality Information Document",
+            "Synthesis Quality Overview",
+            "Licence",
+            "How to cite"
+        ],
+        "Citation": "https://doi.org/10.48670/mds-00321",
+        "Data File Type": "Grid",
+        "Date Accessed": "30 March 2023",
+        "Accessed From": "https://doi.org/10.48670/mds-00321",
+        "Additional Notes/Links": [
+            "This dataset provides a time series of gap-free maps of Sea Surface Temperature (SST) foundation at high resolution on a 0.10 x 0.10 degree grid (approximately 10 x 10 km) for the Global Ocean, every 24 hours.",
+            "The Copernicus Marine Viewer (MyOcean Pro) allows exploration of the catalogue online with multi-projection maps and graphs vs. time, elevation, and/or distance.",
+            "MyOcean Viewer offers high-quality information free of charge and is ad-free.",
+            "New colormaps consider colorblind viewers and avoid visual distortion induced by some popular colormaps."
+        ]
+    },
+    {
+        "Data Set Name": "Global Ocean OSTIA Sea Surface Temperature and Sea Ice Analysis",
+        "Owner/Organisation": "Copernicus Marine Service",
+        "Spatial Resolution": "0.05 degrees \u00d7 0.05 degrees",
+        "Temporal Resolution": [
+            "Daily",
+            "Monthly"
+        ],
+        "Spatial Extent": {
+            "oceans": [
+                "global"
+            ],
+            "lat": [
+                -89.97,
+                89.97
+            ],
+            "lon": [
+                -179.98,
+                179.98
+            ]
+        },
+        "Temporal Extent": [
+            "1 Jan 2007",
+            "18 Jun 2024"
+        ],
+        "Measured Quantities": [
+            "Sea surface temperature (SST)",
+            "Sea ice area fraction"
+        ],
+        "Precision": "Not specified",
+        "Missing Values/Outliers Protocol": "Not specified",
+        "Data Format": [
+            "NetCDF-3",
+            "NetCDF-4"
+        ],
+        "Processing Level": "Level 4",
+        "Documentation": [
+            "User Manual",
+            "Quality Information Document",
+            "Synthesis Quality Overview",
+            "Licence",
+            "How to cite"
+        ],
+        "Citation": "https://doi.org/10.48670/moi-00165",
+        "Data File Type": "Grid",
+        "Date Accessed": "30 March 2023",
+        "Accessed From": "https://doi.org/10.48670/moi-00165",
+        "Additional Notes/Links": [
+            "For the Global Ocean, the OSTIA global foundation Sea Surface Temperature product provides daily gap-free maps of Foundation Sea Surface Temperature at 0.05\u00b0 x 0.05\u00b0 horizontal grid resolution, using in-situ and satellite data from both infrared and microwave radiometers.",
+            "The Operational Sea Surface Temperature and Ice Analysis (OSTIA) system is run by the UK's Met Office and delivered by IFREMER PU.",
+            "OSTIA uses satellite data provided by the GHRSST project together with in-situ observations to determine the sea surface temperature.",
+            "A high resolution (1/20\u00b0 - approx. 6 km) daily analysis of sea surface temperature (SST) is produced for the global ocean and some lakes.",
+            "The Copernicus Marine Viewer (MyOcean Pro) allows exploration of the catalogue online with multi-projection maps and graphs vs. time, elevation, and/or distance.",
+            "MyOcean Viewer offers high-quality information free of charge and is ad-free.",
+            "New colormaps consider colorblind viewers and avoid visual distortion induced by some popular colormaps."
+        ]
+    },
+    {
+        "Data Set Name": "ESA SST CCI and C3S reprocessed sea surface temperature analyses",
+        "Owner/Organisation": "Copernicus Marine Service",
+        "Spatial Resolution": "0.05 degrees \u00d7 0.05 degrees",
+        "Temporal Resolution": [
+            "Daily"
+        ],
+        "Spatial Extent": {
+            "oceans": [
+                "global"
+            ],
+            "lat": [
+                -89.97,
+                89.97
+            ],
+            "lon": [
+                -179.98,
+                179.98
+            ]
+        },
+        "Temporal Extent": [
+            "1 Sep 1981",
+            "31 Oct 2022"
+        ],
+        "Measured Quantities": [
+            "Sea water temperature (T)",
+            "Sea ice area fraction"
+        ],
+        "Precision": "Not specified",
+        "Missing Values/Outliers Protocol": "Not specified",
+        "Data Format": [
+            "NetCDF-4"
+        ],
+        "Processing Level": "Level 4",
+        "Documentation": [
+            "User Manual",
+            "Quality Information Document",
+            "Synthesis Quality Overview",
+            "Licence",
+            "How to cite"
+        ],
+        "Citation": "https://doi.org/10.48670/moi-00169",
+        "Data File Type": "Grid",
+        "Date Accessed": "30 March 2023",
+        "Accessed From": "https://doi.org/10.48670/moi-00169",
+        "Additional Notes/Links": [
+            "The ESA SST CCI and C3S global Sea Surface Temperature Reprocessed product provides gap-free maps of daily average SST at 20 cm depth at 0.05\u00b0 x 0.05\u00b0 horizontal grid resolution, using satellite data from the (A)ATSRs, SLSTR and the AVHRR series of sensors.",
+            "The ESA SST CCI and C3S level 4 analyses were produced by running the Operational Sea Surface Temperature and Sea Ice Analysis (OSTIA) system to provide a high resolution (1/20\u00b0 - approx. 5 km grid resolution) daily analysis of the daily average sea surface temperature (SST) at 20 cm depth for the global ocean.",
+            "Only (A)ATSR, SLSTR and AVHRR satellite data processed by the ESA SST CCI and C3S projects were used, giving a stable product.",
+            "It also uses reprocessed sea-ice concentration data from the EUMETSAT OSI-SAF (OSI-450 and OSI-430)."
+        ]
+    },
+    {
+        "Data Set Name": "Global Ocean OSTIA Sea Surface Temperature and Sea Ice Reprocessed",
+        "Owner/Organisation": "Copernicus Marine Service",
+        "Spatial Resolution": "0.05 degrees \u00d7 0.05 degrees",
+        "Temporal Resolution": [
+            "Daily"
+        ],
+        "Spatial Extent": {
+            "oceans": [
+                "global"
+            ],
+            "lat": [
+                -89.97,
+                89.97
+            ],
+            "lon": [
+                -179.98,
+                179.98
+            ]
+        },
+        "Temporal Extent": [
+            "1 Oct 1981",
+            "31 May 2022"
+        ],
+        "Measured Quantities": [
+            "Sea surface temperature (SST)",
+            "Sea ice area fraction"
+        ],
+        "Precision": "Not specified",
+        "Missing Values/Outliers Protocol": "Not specified",
+        "Data Format": [
+            "NetCDF-4"
+        ],
+        "Processing Level": "Level 4",
+        "Documentation": [
+            "User Manual",
+            "Quality Information Document",
+            "Synthesis Quality Overview",
+            "Licence",
+            "How to cite"
+        ],
+        "Citation": "https://doi.org/10.48670/moi-00168",
+        "Data File Type": "Grid",
+        "Date Accessed": "30 March 2023",
+        "Accessed From": "https://doi.org/10.48670/moi-00168",
+        "Additional Notes/Links": [
+            "The OSTIA (Good et al., 2020) global sea surface temperature reprocessed product provides daily gap-free maps of foundation sea surface temperature and ice concentration (referred to as an L4 product) at 0.05\u00b0 x 0.05\u00b0 horizontal grid resolution, using in-situ and satellite data.",
+            "This product provides the foundation Sea Surface Temperature, which is the temperature free of diurnal variability.",
+            "References: Good, S.; Fiedler, E.; Mao, C.; Martin, M.J.; Maycock, A.; Reid, R.; Roberts-Jones, J.; Searle, T.; Waters, J.; While, J.; Worsfold, M. The Current Configuration of the OSTIA System for Operational Production of Foundation Sea Surface Temperature and Ice Concentration Analyses. Remote Sens. 2020, 12, 720, doi:10.3390/rs12040720"
+        ]
+    },
+    {
+        "Data Set Name": "European Seas Gridded L4 Sea Surface Heights and Derived Variables Reprocessed 1993 Ongoing",
+        "Owner/Organisation": "Copernicus Marine Service",
+        "Spatial Resolution": "0.125 degrees \u00d7 0.125 degrees",
+        "Temporal Resolution": [
+            "Daily"
+        ],
+        "Spatial Extent": {
+            "oceans": [
+                "Global Ocean",
+                "Arctic Ocean",
+                "Baltic Sea",
+                "Black Sea",
+                "Mediterranean Sea",
+                "Atlantic: Iberia-Biscay-Ireland",
+                "Atlantic: North",
+                "Atlantic: NW European Shelf",
+                "Europe"
+            ],
+            "lat": [
+                19.94,
+                66.06
+            ],
+            "lon": [
+                -30.06,
+                42.06
+            ]
+        },
+        "Temporal Extent": [
+            "1 Jan 1993",
+            "8 Sep 2023"
+        ],
+        "Measured Quantities": [
+            "Sea surface height above geoid (SSH)",
+            "Sea surface height above sea level (SSH)",
+            "Surface geostrophic eastward sea water velocity assuming sea level for geoid (UV)",
+            "Surface geostrophic northward sea water velocity assuming sea level for geoid (UV)",
+            "Surface geostrophic eastward sea water velocity (UV)",
+            "Surface geostrophic northward sea water velocity (UV)"
+        ],
+        "Precision": "Not specified",
+        "Missing Values/Outliers Protocol": "Not specified",
+        "Data Format": [
+            "NetCDF-4"
+        ],
+        "Processing Level": "Level 4",
+        "Documentation": [
+            "User Manual",
+            "Quality Information Document",
+            "Synthesis Quality Overview",
+            "Licence",
+            "How to cite"
+        ],
+        "Citation": "https://doi.org/10.48670/moi-00141",
+        "Data File Type": "Grid",
+        "Date Accessed": "30 November 2023",
+        "Accessed From": "https://doi.org/10.48670/moi-00141",
+        "Additional Notes/Links": [
+            "Altimeter satellite gridded Sea Level Anomalies (SLA) computed with respect to a twenty-year [1993, 2012] mean. The SLA is estimated by Optimal Interpolation, merging the L3 along-track measurement from the different altimeter missions available. Part of the processing is fitted to the European Sea area.",
+            "The product gives additional variables (i.e. Absolute Dynamic Topography and geostrophic currents (absolute and anomalies)). It serves in delayed-time applications.",
+            "This product is processed by the DUACS multimission altimeter data processing system."
+        ]
+    },
+    {
+        "Data Set Name": "Global Ocean Hourly Sea Surface Wind and Stress from Scatterometer and Model",
+        "Owner/Organisation": "Copernicus Marine Service",
+        "Spatial Resolution": "0.125 degrees \u00d7 0.125 degrees",
+        "Temporal Resolution": [
+            "Hourly"
+        ],
+        "Spatial Extent": {
+            "oceans": [
+                "Global Ocean"
+            ],
+            "lat": [
+                -89.94,
+                89.94
+            ],
+            "lon": [
+                -179.94,
+                179.94
+            ]
+        },
+        "Temporal Extent": [
+            "11 Mar 2022",
+            "19 Jun 2024"
+        ],
+        "Measured Quantities": [
+            "Eastward wind (WIND)",
+            "Northward wind (WIND)",
+            "Surface downward eastward stress (WIND)",
+            "Surface downward northward stress (WIND)",
+            "Stress curl (WIND)",
+            "Stress divergence (WIND)",
+            "Air density (WIND)",
+            "Wind curl (WIND)",
+            "Wind divergence (WIND)"
+        ],
+        "Precision": "Not specified",
+        "Missing Values/Outliers Protocol": "Not specified",
+        "Data Format": [
+            "NetCDF-4"
+        ],
+        "Processing Level": "Level 4",
+        "Documentation": [
+            "User Manual",
+            "Quality Information Document",
+            "Synthesis Quality Overview",
+            "Licence",
+            "How to cite"
+        ],
+        "Citation": "https://doi.org/10.48670/moi-00305",
+        "Data File Type": "Grid",
+        "Date Accessed": "18 June 2024",
+        "Accessed From": "https://doi.org/10.48670/moi-00305",
+        "Additional Notes/Links": [
+            "The product contains hourly Level-4 sea surface wind and stress fields at 0.125 degrees horizontal spatial resolution.",
+            "Scatterometer observations for Metop-B and Metop-C ASCAT and their collocated ECMWF operational model variables are used to calculate temporally-averaged difference fields.",
+            "Bias corrections for hourly ECMWF operational model fields are applied, with standard deviation of differences (for wind and stress fields) and difference of variances (for divergence and curl fields) included."
+        ]
+    },
+    {
+        "Data Set Name": "Global Ocean Hourly Reprocessed Sea Surface Wind and Stress from Scatterometer and Model",
+        "Owner/Organisation": "Copernicus Marine Service",
+        "Spatial Resolution": "0.125 degrees \u00d7 0.125 degrees",
+        "Temporal Resolution": "Hourly",
+        "Spatial Extent": {
+            "Oceans": [
+                "Global Ocean"
+            ],
+            "Latitude": "-89.94\u00b0 to 89.94\u00b0",
+            "Longitude": "-179.94\u00b0 to 179.94\u00b0"
+        },
+        "Temporal Extent": "1 Jun 1994 to 19 Feb 2024",
+        "Measured Quantities": [
+            "Eastward wind (WIND)",
+            "Northward wind (WIND)",
+            "Surface downward eastward stress (WIND)",
+            "Surface downward northward stress (WIND)",
+            "Stress curl (WIND)",
+            "Stress divergence (WIND)",
+            "Air density (WIND)"
+        ],
+        "Precision": "Not specified",
+        "Missing Values/Outliers Protocol": "Not specified",
+        "Data Format": "NetCDF-4",
+        "Processing Level": "Level 4",
+        "Documentation": [
+            "User Manual",
+            "Quality Information Document",
+            "Synthesis Quality Overview",
+            "Licence",
+            "How to cite"
+        ],
+        "Citation": "https://doi.org/10.48670/moi-00185",
+        "Data File Type": "Grid",
+        "Date Accessed": "30 November 2023",
+        "Accessed From": "https://doi.org/10.48670/moi-00185",
+        "Additional Notes/Links": [
+            "The product contains hourly Level-4 sea surface wind and stress fields at 0.125 degrees horizontal spatial resolution.",
+            "Scatterometer observations from Metop-A, Metop-B, Metop-C ASCAT (0.125 degrees), QuikSCAT SeaWinds, ERS-1, and ERS-2 SCAT (0.25 degrees) are used along with ECMWF ERA5 reanalysis model variables.",
+            "Bias corrections for hourly ECMWF ERA5 model fields are applied, with standard deviation of differences (for wind and stress fields) and difference of variances (for divergence and curl fields) included."
+        ]
+    },
+    {
+        "Data Set Name": "Global Ocean Monthly Mean Sea Surface Wind and Stress from Scatterometer and Model",
+        "Owner/Organisation": "Copernicus Marine Service",
+        "Spatial Resolution": "0.25 degrees \u00d7 0.25 degrees",
+        "Temporal Resolution": [
+            "Monthly"
+        ],
+        "Spatial Extent": {
+            "oceans": [
+                "Global Ocean",
+                "Arctic Ocean",
+                "Baltic Sea",
+                "Black Sea",
+                "Mediterranean Sea",
+                "Atlantic: Iberia-Biscay-Ireland",
+                "Atlantic: North",
+                "Atlantic: NW European Shelf"
+            ],
+            "lat": [
+                -89.87,
+                89.88
+            ],
+            "lon": [
+                -179.87,
+                179.88
+            ]
+        },
+        "Temporal Extent": [
+            "1 Aug 1999",
+            "1 Feb 2024"
+        ],
+        "Measured Quantities": [
+            "Surface downward northward stress (WIND)",
+            "Eastward wind (WIND)",
+            "Northward wind (WIND)",
+            "Wind speed (WIND)",
+            "Surface downward eastward stress (WIND)"
+        ],
+        "Precision": "Not specified",
+        "Missing Values/Outliers Protocol": "Not specified",
+        "Data Format": [
+            "NetCDF-4"
+        ],
+        "Processing Level": "Level 4",
+        "Documentation": [
+            "User Manual",
+            "Quality Information Document",
+            "Synthesis Quality Overview",
+            "Licence",
+            "How to cite"
+        ],
+        "Citation": "https://doi.org/10.48670/moi-00181",
+        "Data File Type": "Grid",
+        "Date Accessed": "30 November 2023",
+        "Accessed From": "https://doi.org/10.48670/moi-00181",
+        "Additional Notes/Links": [
+            "The product contains monthly Level-4 sea surface wind and stress fields at 0.25 degrees horizontal spatial resolution.",
+            "Monthly averaged wind and stress fields based on ECMWF ERA5 reanalysis fields, corrected for biases using Level-3 scatterometer observations from Metop-A, Metop-B, Metop-C ASCAT, QuikSCAT SeaWinds, ERS-1, and ERS-2 SCAT satellite instruments.",
+            "Includes standard deviation of monthly mean variables and number of observations used."
+        ]
+    },
+    {
+        "Data Set Name": "Global Total (COPERNICUS-GLOBCURRENT), Ekman and Geostrophic currents at the Surface and 15m",
+        "Owner/Organisation": "Copernicus Marine Service",
+        "Spatial Resolution": "0.25\u00b0 \u00d7 0.25\u00b0",
+        "Temporal Resolution": [
+            "Hourly",
+            "Daily",
+            "Monthly"
+        ],
+        "Spatial Extent": {
+            "Oceans": [
+                "Global Ocean"
+            ],
+            "Latitude": "-89.87\u00b0 to 89.88\u00b0",
+            "Longitude": "-179.87\u00b0 to 179.88\u00b0"
+        },
+        "Temporal Extent": [
+            "1 Jan 1993",
+            "19 Jun 2024"
+        ],
+        "Measured Quantities": [
+            "Northward sea water velocity (UV)",
+            "Eastward sea water velocity (UV)",
+            "Surface geostrophic eastward sea water velocity (UV)",
+            "Surface geostrophic northward sea water velocity (UV)"
+        ],
+        "Precision": "Not specified",
+        "Missing Values/Outliers Protocol": "Not specified",
+        "Data Format": [
+            "NetCDF-4"
+        ],
+        "Processing Level": "Level 4",
+        "Documentation": [
+            "User Manual",
+            "Quality Information Document",
+            "Synthesis Quality Overview",
+            "Licence",
+            "How to cite"
+        ],
+        "Citation": "https://doi.org/10.48670/mds-00327",
+        "Data File Type": "Grid",
+        "Date Accessed": "30 November 2023",
+        "Accessed From": "https://doi.org/10.48670/mds-00327",
+        "Additional Notes/Links": [
+            "The product includes Ekman and Geostrophic currents at the Surface and 15m depth, derived from CMEMS satellite Geostrophic surface currents and modelled Ekman currents using ERA5 wind stress in REP and ERA5* in NRT.",
+            "Hourly, daily, and monthly means are available."
+        ]
+    },
+    {
+        "Data Set Name": "Multi Observation Global Ocean 3D Temperature Salinity Height Geostrophic Current and MLD",
+        "Owner/Organisation": "Copernicus Marine Service",
+        "Spatial Resolution": "0.25\u00b0 \u00d7 0.25\u00b0",
+        "Temporal Resolution": [
+            "Weekly",
+            "Monthly"
+        ],
+        "Spatial Extent": {
+            "Oceans": [
+                "Global Ocean"
+            ],
+            "Latitude": "-82.12\u00b0 to 89.88\u00b0",
+            "Longitude": "-179.87\u00b0 to 179.88\u00b0"
+        },
+        "Temporal Extent": [
+            "1 Jan 1993",
+            "12 Jun 2024"
+        ],
+        "Measured Quantities": [
+            "Sea water temperature (T)",
+            "Sea water salinity (S)",
+            "Geostrophic eastward sea water velocity (UV)",
+            "Geostrophic northward sea water velocity (UV)",
+            "Ocean mixed layer thickness (MLD)",
+            "Geopotential height"
+        ],
+        "Precision": "Not specified",
+        "Missing Values/Outliers Protocol": "Not specified",
+        "Data Format": [
+            "NetCDF-4"
+        ],
+        "Processing Level": "Level 4",
+        "Documentation": [
+            "User Manual",
+            "Quality Information Document",
+            "Synthesis Quality Overview",
+            "Licence",
+            "How to cite"
+        ],
+        "Citation": "https://doi.org/10.48670/moi-00052",
+        "Data File Type": "Grid",
+        "Date Accessed": "30 November 2023",
+        "Accessed From": "https://doi.org/10.48670/moi-00052",
+        "Additional Notes/Links": [
+            "The product includes 3D Temperature, Salinity, Heights, Geostrophic Currents and Mixed Layer Depth on a 1/4 degree regular grid and 50 depth levels from the surface down to the bottom.",
+            "Four datasets are available: dataset-armor-3d-nrt-weekly, dataset-armor-3d-nrt-monthly, dataset-armor-3d-rep-weekly, dataset-armor-3d-rep-monthly."
+        ]
+    },
+    {
+        "Data Set Name": "Global Observed Ocean Physics 3D Quasi-Geostrophic Currents (OMEGA3D)",
+        "Owner/Organisation": "Copernicus Marine Service",
+        "Spatial Resolution": "0.25 degrees \u00d7 0.25 degrees",
+        "Temporal Resolution": "Weekly",
+        "Spatial Extent": {
+            "Oceans": [
+                "Global Ocean"
+            ],
+            "Latitude": "-89.87\u00b0 to 89.88\u00b0",
+            "Longitude": "-179.87\u00b0 to 179.88\u00b0"
+        },
+        "Temporal Extent": [
+            "6 Jan 1993",
+            "26 Dec 2018"
+        ],
+        "Measured Quantities": [
+            "Upward sea water velocity (UV)",
+            "Northward sea water velocity (UV)",
+            "Eastward sea water velocity (UV)"
+        ],
+        "Precision": "Not specified",
+        "Missing Values/Outliers Protocol": "Not specified",
+        "Data Format": [
+            "NetCDF-4"
+        ],
+        "Processing Level": "Level 4",
+        "Documentation": [
+            "User Manual",
+            "Quality Information Document",
+            "Synthesis Quality Overview",
+            "Licence",
+            "How to cite"
+        ],
+        "Citation": "https://doi.org/10.25423/cmcc/multiobs_glo_phy_w_rep_015_007",
+        "Data File Type": "Grid",
+        "Date Accessed": "30 November 2023",
+        "Accessed From": "https://doi.org/10.25423/cmcc/multiobs_glo_phy_w_rep_015_007",
+        "Additional Notes/Links": [
+            "The product provides weekly quasi-geostrophic ocean currents from the surface to 1500m depth, derived from ARMOR3D data and ERA-Interim surface fluxes.",
+            "Velocities are available on a regular grid at 0.25 degrees horizontal resolution."
+        ]
+    },
+    {
+        "Data Set Name": "SSS SMOS/SMAP L4 OI - LOPS-v2023",
+        "Owner/Organisation": "Copernicus Marine Service",
+        "Spatial Resolution": "0.25 degrees \u00d7 0.25 degrees",
+        "Temporal Resolution": "Weekly",
+        "Spatial Extent": {
+            "Oceans": [
+                "Global Ocean"
+            ],
+            "Latitude": "-83.6 degrees to 83.6 degrees",
+            "Longitude": "-179.87 degrees to 179.87 degrees"
+        },
+        "Temporal Extent": [
+            "3 Jun 2010",
+            "21 Dec 2023"
+        ],
+        "Measured Quantities": [
+            "Sea surface temperature (SST)",
+            "Sea surface salinity (SSS)",
+            "Sea surface density (SSD)",
+            "Sea water conservative temperature"
+        ],
+        "Precision": "Not specified",
+        "Missing Values/Outliers Protocol": "Not specified",
+        "Data Format": [
+            "NetCDF-4"
+        ],
+        "Processing Level": "Level 4",
+        "Documentation": [
+            "User Manual",
+            "Quality Information Document",
+            "Synthesis Quality Overview",
+            "Licence",
+            "How to cite"
+        ],
+        "Citation": "https://doi.org/10.1175/JTECH-D-20-0093.1",
+        "Data File Type": "Grid",
+        "Date Accessed": "18 June 2024",
+        "Accessed From": "https://doi.org/10.1175/JTECH-D-20-0093.1",
+        "Additional Notes/Links": [
+            "The product integrates SMOS and SMAP satellite data with in-situ observations using optimal interpolation (OI) to provide enhanced sea surface salinity analysis.",
+            "Data is available biannually and covers a global spatial extent with weekly temporal resolution."
+        ]
+    },
+    {
+        "Data Set Name": "Multi Observation Global Ocean Sea Surface Salinity and Sea Surface Density",
+        "Owner/Organisation": "Copernicus Marine Service",
+        "Spatial Resolution": "0.125 degrees \u00d7 0.125 degrees",
+        "Temporal Resolution": "Daily, Monthly",
+        "Spatial Extent": {
+            "Oceans": [
+                "Global Ocean"
+            ],
+            "Latitude": "-89.94 degrees to 89.94 degrees",
+            "Longitude": "-179.94 degrees to 179.94 degrees"
+        },
+        "Temporal Extent": [
+            "1 Jan 1993",
+            "13 Jun 2024"
+        ],
+        "Measured Quantities": [
+            "Sea surface salinity (SSS)",
+            "Sea surface density (SSD)"
+        ],
+        "Precision": "Not specified",
+        "Missing Values/Outliers Protocol": "Not specified",
+        "Data Format": [
+            "NetCDF-4"
+        ],
+        "Processing Level": "Level 4",
+        "Documentation": [
+            "User Manual",
+            "Quality Information Document",
+            "Synthesis Quality Overview",
+            "Licence",
+            "How to cite"
+        ],
+        "Citation": "https://doi.org/10.48670/moi-00051",
+        "Data File Type": "Grid",
+        "Date Accessed": "30 November 2023",
+        "Accessed From": "https://doi.org/10.48670/moi-00051",
+        "Additional Notes/Links": [
+            "The product combines sea surface salinity data from SMOS and SMAP satellites with in-situ observations using optimal interpolation.",
+            "Data is updated weekly with monthly and annual updates available."
+        ]
+    }
+]
