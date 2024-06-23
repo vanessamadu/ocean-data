@@ -715,5 +715,85 @@
             "The product combines sea surface salinity data from SMOS and SMAP satellites with in-situ observations using optimal interpolation.",
             "Data is updated weekly with monthly and annual updates available."
         ]
+    },
+    {
+        "Data Set Name": "ECCO Ocean Mixed Layer Depth - Monthly Mean 0.5 Degree (Version 4 Release 4)",
+        "Owner/Organisation": "PO.DAAC, Jet Propulsion Laboratory, California Institute of Technology",
+        "Spatial Resolution": "0.5 degrees \u00d7 0.5 degrees",
+        "Temporal Resolution": "Monthly",
+        "Spatial Extent": {
+            "Latitude": "90 degrees N to -90 degrees S",
+            "Longitude": "180 degrees E to -180 degrees W"
+        },
+        "Temporal Extent": [
+            "1992-Jan-01",
+            "2018-Jan-01"
+        ],
+        "Measured Quantities": [
+            "Ocean mixed layer depth",
+            "Sea surface height (SSH)",
+            "Sea surface temperature (SST)",
+            "Sea surface salinity (SSS)",
+            "Ocean bottom pressure (OBP)",
+            "Sea ice concentration",
+            "In-situ ocean temperature and salinity"
+        ],
+        "Precision": "Not specified",
+        "Missing Values/Outliers Protocol": "Not specified",
+        "Data Format": [
+            "NetCDF-4"
+        ],
+        "Processing Level": "Level 4",
+        "Documentation": [
+            "User Manual",
+            "Quality Information Document",
+            "Synthesis Quality Overview",
+            "Licence",
+            "How to cite"
+        ],
+        "Citation": "https://doi.org/10.5067/ECG5M-OML44",
+        "Data File Type": "Grid",
+        "Date Accessed": "19 April 2021",
+        "Accessed From": "https://doi.org/10.5067/ECG5M-OML44",
+        "Additional Notes/Links": [
+            "The dataset is a monthly-averaged reconstruction of ocean and sea-ice state estimates using a 1-degree global configuration of the MIT general circulation model.",
+            "It incorporates various observational data constraints, including satellite altimetry, radiometry, gravimetry, and in-situ measurements."
+        ]
+    },
+    {
+        "Data Set Name": "GEBCO_2023 Grid (sub-ice topography/bathymetry)",
+        "Owner/Organisation": "GEBCO, hosted by the British Oceanographic Data Centre (BODC)",
+        "Spatial Resolution": "15 arc-second interval",
+        "Temporal Resolution": "Not specified",
+        "Spatial Extent": "Global coverage, including under-ice regions for Greenland and Antarctica",
+        "Temporal Extent": "Not specified",
+        "Measured Quantities": [
+            "Sub-ice topography",
+            "Bathymetry"
+        ],
+        "Precision": "Not specified",
+        "Missing Values/Outliers Protocol": "Not specified",
+        "Data Format": [
+            "netCDF",
+            "Data GeoTiff",
+            "Esri ASCII raster"
+        ],
+        "Processing Level": "Not specified",
+        "Documentation": [
+            "User Manual",
+            "Quality Information Document",
+            "Synthesis Quality Overview",
+            "Licence",
+            "How to cite"
+        ],
+        "Citation": "GEBCO Compilation Group (2023) GEBCO 2023 Grid (doi:10.5285/f98b053b-0cbc-6c23-e053-6c86abc0af7b)",
+        "Data File Type": "Grid",
+        "Date Accessed": "Not specified",
+        "Accessed From": "https://doi.org/10.5285/f98b053b-0cbc-6c23-e053-6c86abc0af7b",
+        "Additional Notes/Links": [
+            "The GEBCO_2023 Grid provides a global terrain model including both ocean and land.",
+            "It includes under-ice topography/bathymetry information specifically for Greenland and Antarctica.",
+            "Data can be downloaded as global files or for user-defined areas."
+        ]
     }
 ]
