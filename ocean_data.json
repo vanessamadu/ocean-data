@@ -795,5 +795,44 @@
             "It includes under-ice topography/bathymetry information specifically for Greenland and Antarctica.",
             "Data can be downloaded as global files or for user-defined areas."
         ]
+    },
+    {
+        "Data Set Name": "Global Ocean Gridded L4 Sea Surface Heights And Derived Variables Nrt",
+        "Owner/Organisation": "Copernicus Marine Service, implemented by Mercator Ocean International on behalf of the European Commission",
+        "Spatial Resolution": "0.25\u00b0 \u00d7 0.25\u00b0",
+        "Temporal Resolution": "Daily",
+        "Spatial Extent": "Global Ocean, Arctic Ocean (Lat -89.87\u00b0 to 89.88\u00b0, Lon -179.87\u00b0 to 179.88\u00b0)",
+        "Temporal Extent": "1 Jan 2022 to 23 Jun 2024",
+        "Measured Quantities": [
+            "Sea surface height above sea level (SSH)",
+            "Sea surface height above geoid (SSH)",
+            "Surface geostrophic northward sea water velocity assuming sea level for geoid (UV)",
+            "Surface geostrophic northward sea water velocity (UV)",
+            "Surface geostrophic eastward sea water velocity assuming sea level for geoid (UV)",
+            "Surface geostrophic eastward sea water velocity (UV)"
+        ],
+        "Precision": "Not specified",
+        "Missing Values/Outliers Protocol": "Not specified",
+        "Data Format": [
+            "NetCDF-4"
+        ],
+        "Processing Level": "Level 4",
+        "Documentation": [
+            "User Manual",
+            "Quality Information Document",
+            "Synthesis Quality Overview",
+            "Licence",
+            "How to cite"
+        ],
+        "Citation": "Copernicus Marine Service (2023) Global Ocean Gridded L 4 Sea Surface Heights And Derived Variables Nrt (doi:10.48670/moi-00149)",
+        "Data File Type": "Grid",
+        "Date Accessed": "Not specified",
+        "Accessed From": "https://doi.org/10.48670/moi-00149",
+        "Additional Notes/Links": [
+            "Altimeter satellite gridded Sea Level Anomalies (SLA) computed with respect to a twenty-year [1993, 2012] mean.",
+            "The SLA is estimated by Optimal Interpolation, merging the L3 along-track measurement from the different altimeter missions available.",
+            "The product gives additional variables (i.e. Absolute Dynamic Topography and geostrophic currents (absolute and anomalies)).",
+            "It serves in near-real time applications and is processed by the DUACS multimission altimeter data processing system."
+        ]
     }
 ]
