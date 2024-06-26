@@ -34,7 +34,7 @@ def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.01, max_iterat
         if diff_u < tolerance and diff_v < tolerance:
             print(f"Converged after {iteration} iterations")
             break
-        print(f"iteration did not converge: diff_u = {diff_u}, diff_v = {diff_v}")
+        print(f"iteration did not converge: diff_u = {diff_u.values}, diff_v = {diff_v.values}")
         u, v = u_new, v_new
     
     return u, v
