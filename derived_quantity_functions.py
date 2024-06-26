@@ -15,14 +15,14 @@ def cyclostrophic_correction(u, v, ug, vg, f_lookup):
 
         lat = ug.coords['latitude'].values[ii]
         f = f_lookup[lat]
-        if np.abs(lat) < 5:
-            # cyclostrophic corrections are only made from latitudes greater than 5 degrees north
+        if np.abs(lat) < 43.125:
+            # cyclostrophic corrections are only made from latitudes greater than 43.125 degrees north
             u_dot_grad_u_x[:,ii,:] = 0
             u_dot_grad_u_y[:,ii,:] = 0
         else:
             u_dot_grad_u_x[:,ii,:]/=f
             u_dot_grad_u_y[:,ii,:]/=f
-
+            
     corrected_u = ug - u_dot_grad_u_x
     corrected_v = vg + u_dot_grad_u_y
     
@@ -33,8 +33,8 @@ def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.01, max_iterat
         print(f"iteration: {iteration}")
         u_new, v_new = cyclostrophic_correction(u, v, ug, vg, f_lookup)
         
-        diff_u = np.max(np.abs(u_new - u))
-        diff_v = np.max(np.abs(v_new - v))
+        diff_u = np.nanmax(np.abs(u_new - u))
+        diff_v = np.nanmax(np.abs(v_new - v))
         
         if diff_u < tolerance and diff_v < tolerance:
             print(f"Converged after {iteration} iterations")
