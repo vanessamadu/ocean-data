@@ -18,15 +18,15 @@ def cyclostrophic_correction(u, v, ug, vg, f_lookup):
         if np.abs(lat) < 5:
             # cyclostrophic corrections are only made from latitudes greater than 5 degrees north
             print(f"latitude: {lat} degrees N")
-            corrected_u = ug
-            corrected_v = vg
+            u_dot_grad_u_x[:,ii,:] = 0
+            u_dot_grad_u_y[:,ii,:] = 0
         else:
             print(f"latitude: {lat} degrees N")
             u_dot_grad_u_x[:,ii,:]/=f
             u_dot_grad_u_y[:,ii,:]/=f
 
-            corrected_u = ug - u_dot_grad_u_x
-            corrected_v = vg + u_dot_grad_u_y
+    corrected_u = ug - u_dot_grad_u_x
+    corrected_v = vg + u_dot_grad_u_y
     
     return corrected_u, corrected_v
 
