@@ -33,8 +33,10 @@ f_lookup = dict(zip(ugosa.coords['latitude'].values,f))
 u = ugosa.copy()
 v = vgosa.copy()
 
+print('data copied successfully')
+
 # Perform the iteration
-u_corrected, v_corrected = iterate_until_convergence(u, v, ugosa, vgosa, f)
+u_corrected, v_corrected = iterate_until_convergence(u, v, ugosa, vgosa, f_lookup)
 
 # Convert corrected velocities to DataArray
 u_corrected_da = xr.DataArray(u_corrected, coords=ugosa.coords, dims=ugosa.dims)

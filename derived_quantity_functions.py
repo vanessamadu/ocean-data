@@ -1,17 +1,25 @@
 import numpy as np
 
-def cyclostrophic_correction(u, v, ug, vg, f):
+def cyclostrophic_correction(u, v, ug, vg, f_lookup):
 
     du_dx = np.gradient(u, axis=-1)
     du_dy = np.gradient(u, axis=-2)
     dv_dx = np.gradient(v, axis=-1)
     dv_dy = np.gradient(v, axis=-2)
+    print('gradients computed successfully')
     
     u_dot_grad_u_x = u * dv_dx + v * dv_dy
     u_dot_grad_u_y = u * du_dx + v * du_dy
-    
-    corrected_u = ug - (1 / f) * u_dot_grad_u_x
-    corrected_v = vg + (1 / f) * u_dot_grad_u_y
+
+    for ii in range(len(ug.coords['latitude'].values)):
+        print(f"iteration: {ii}")
+        lat = ug.coords['latitude'].values[ii]
+        f = f_lookup[lat]
+        u_dot_grad_u_x[:,ii,:]/=f
+        u_dot_grad_u_y[:,ii,:]/=f
+
+    corrected_u = ug - u_dot_grad_u_x
+    corrected_v = vg + u_dot_grad_u_y
     
     return corrected_u, corrected_v
 
