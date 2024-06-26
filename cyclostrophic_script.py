@@ -2,7 +2,7 @@ from derived_quantity_functions import *
 import xarray as xr
 
 output_directory = "D:\PhD\ocean-datasets\copernicus-data"
-velocities_filename="CMEMS_West_NA_currents_2012_2023"
+velocities_filename="CMEMS_West_NA_currents_2012_2023.nc"
 
 # load the NetCDF file
 data_path = f"{output_directory}/{velocities_filename}"
@@ -26,7 +26,8 @@ https://doi.org/10.1016/S1874-5792(07)80010-3.
 (https://www.sciencedirect.com/science/article/pii/S1874579207800103)
 Keywords: planetary motion; quasi periodic forcing; skew product dynamics; thin domain dynamics
 '''
-f = [2*omega*np.sin(theta) for theta in ugosa.coords['latitude'].values]
+f = np.array([2*omega*np.sin(theta*np.pi/180) for theta in ugosa.coords['latitude'].values])
+f_lookup = dict(zip(ugosa.coords['latitude'].values,f))
 
 # initialise
 u = ugosa.copy()
