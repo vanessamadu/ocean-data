@@ -1,4 +1,3 @@
-import xarray as xr
 import numpy as np
 
 def cyclostrophic_correction(u, v, ug, vg, f):
