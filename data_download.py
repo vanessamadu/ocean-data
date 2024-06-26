@@ -5,6 +5,7 @@ import xarray as xr
 import os
 
 
+# scripts for accessing the Copernicus Python API to download data subsets
 
 def generate_daily_timestamps(start_date, end_date):
     return pd.date_range(start=start_date, end=end_date, freq='D').strftime('%Y-%m-%d 00:00:00').tolist()
