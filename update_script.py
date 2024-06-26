@@ -1,6 +1,8 @@
-from json_functions import read_json_to_dataframe, update_json_file
+from json_functions import update_json_file
 from data_module_list import *
 import json
+
+# script to update the ocean data reference guide json file
 
 filename = "ocean_data.json"
 with open(filename, "w") as file:
