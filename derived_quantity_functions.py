@@ -12,7 +12,7 @@ def cyclostrophic_correction(u, v, ug, vg, f_lookup):
     u_dot_grad_u_y = u * du_dx + v * du_dy
 
     for ii in range(len(ug.coords['latitude'].values)):
-        print(f"iteration: {ii}")
+
         lat = ug.coords['latitude'].values[ii]
         f = f_lookup[lat]
         u_dot_grad_u_x[:,ii,:]/=f
@@ -23,9 +23,10 @@ def cyclostrophic_correction(u, v, ug, vg, f_lookup):
     
     return corrected_u, corrected_v
 
-def iterate_until_convergence(u, v, ug, vg, f, tolerance=0.01, max_iterations=100):
+def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.01, max_iterations=100):
     for iteration in range(max_iterations):
-        u_new, v_new = cyclostrophic_correction(u, v, ug, vg, f)
+        print(f"iteration: {iteration}")
+        u_new, v_new = cyclostrophic_correction(u, v, ug, vg, f_lookup)
         
         diff_u = np.max(np.abs(u_new - u))
         diff_v = np.max(np.abs(v_new - v))
@@ -33,7 +34,7 @@ def iterate_until_convergence(u, v, ug, vg, f, tolerance=0.01, max_iterations=10
         if diff_u < tolerance and diff_v < tolerance:
             print(f"Converged after {iteration} iterations")
             break
-        
+        print(f"iteration did not converge: diff_u = {diff_u}, diff_v = {diff_v}")
         u, v = u_new, v_new
     
     return u, v
