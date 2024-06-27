@@ -119,6 +119,7 @@ elif toggle == 'long_wind':
     output_filename = "Full_CMEMS_West_NA_wind_2012_2023.nc"
     timestamps = generate_daily_timestamps(start_date, end_date)
 
+
     # Request subset for each timestamp
     for timestamp in timestamps:
         # Read credentials from environment variables
@@ -133,6 +134,10 @@ elif toggle == 'long_wind':
             end_datetime=timestamp,
             output_filename=f"CMEMS_West_NA_wind_{timestamp.replace(':', '').replace('-', '')}.nc",
             output_directory=output_directory,
+            force_download= True,
+            dataset_version="202211",
+            dataset_part="default",
+            service= "arco-geo-series"
         )
     # List of all downloaded filesy
     file_paths = sorted(glob.glob(f"{output_directory}/CMEMS_West_NA_wind_*.nc"))
