@@ -8,9 +8,7 @@ output_filename_long = "derived_West_NA_sst_gradients_2012_2022.nc"
 output_filename_short = "derived_West_NA_sst_gradients_2022_2024.nc"
 # load the NetCDF file
 data_path = f"{output_directory}/{filename_long}"
-sst = xr.open_dataset(data_path)
+sst = xr.open_dataset(data_path).to_array()
 
-data_array = (sst.copy()).to_array()
-
-sst_gradient(data_array,output_directory,output_filename_short)
-sst_gradient(data_array,output_directory,output_filename_long)
+sst_gradient(sst,output_directory,output_filename_short)
+sst_gradient(sst,output_directory,output_filename_long)
