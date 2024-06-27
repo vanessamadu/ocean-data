@@ -44,7 +44,7 @@ def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.01, max_iterat
     
     return u, v
 
-def sst_gradient(sst,output_directory):
+def sst_gradient(sst,output_directory,output_filename):
 
     sst_gradient_x = np.gradient(sst,axis=-1)
     sst_gradient_y = np.gradient(sst,axis=-2)
@@ -80,4 +80,4 @@ def sst_gradient(sst,output_directory):
         'references': '[ADD REFERENCES]'
     }
     
-    sst_gradient_ds.to_netcdf(f'{output_directory}/derived_sst_gradients.nc')
+    sst_gradient_ds.to_netcdf(f'{output_directory}/{output_filename}')
