@@ -11,7 +11,7 @@ dataset = xr.open_dataset(data_path)
 # extract data
 ugosa = dataset["ugosa"]
 vgosa = dataset["vgosa"]
-omega = 7.3e-5 
+omega = 7.2921e-5 
 ''' Citation: George R. Sell,
 Chapter 6 - The Foundations of Oceanic Dynamics and Climate Modeling,
 Editor(s): S. Friedlander, D. Serre,
@@ -26,7 +26,8 @@ https://doi.org/10.1016/S1874-5792(07)80010-3.
 (https://www.sciencedirect.com/science/article/pii/S1874579207800103)
 Keywords: planetary motion; quasi periodic forcing; skew product dynamics; thin domain dynamics
 '''
-f = np.array([2*omega*np.sin(theta*np.pi/180) for theta in ugosa.coords['latitude'].values])
+#f = np.array([2*omega*np.sin(theta*np.pi/180) for theta in ugosa.coords['latitude'].values])
+f = np.array([10e-2*ii for ii in np.ones(len(ugosa.coords['latitude'].values))])
 f_lookup = dict(zip(ugosa.coords['latitude'].values,f))
 
 # initialise
