@@ -46,15 +46,15 @@ def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.01, max_iterat
 
 def sst_gradient(sst,output_directory):
 
-    sst_gradient_x = np.gradient(data_array,axis=-1)
-    sst_gradient_y = np.gradient(data_array,axis=-2)
+    sst_gradient_x = np.gradient(sst,axis=-1)
+    sst_gradient_y = np.gradient(sst,axis=-2)
 
     # create data arrays
-    sst_gradient_x_da = xr.DataArray(sst_gradient_x,coords=data_array.coords,dims=data_array.dims,name='sst_gradient_x')
-    sst_gradient_y_da = xr.DataArray(sst_gradient_y,coords=data_array.coords,dims=data_array.dims,name= 'sst_gradient_y')
+    sst_gradient_x_da = xr.DataArray(sst_gradient_x,coords=sst.coords,dims=sst.dims,name='sst_gradient_x')
+    sst_gradient_y_da = xr.DataArray(sst_gradient_y,coords=sst.coords,dims=sst.dims,name= 'sst_gradient_y')
 
     # create dataset
-    data_array = xr.Dataset(
+    sst_gradient_ds = xr.Dataset(
         {
             'sst_gradient_x':sst_gradient_x_da,
             'sst_gradient_y':sst_gradient_y_da
@@ -62,17 +62,17 @@ def sst_gradient(sst,output_directory):
     )
 
     # set attributes for the gradient variables
-    data_array['sst_gradient_x'].attrs = {
+    sst_gradient_ds['sst_gradient_x'].attrs = {
         'units': 'K/m',
         'long_name': 'SST Gradient in X direction'
     }
-    data_array['sst_gradient_y'].attrs = {
+    sst_gradient_ds['sst_gradient_y'].attrs = {
         'units': 'K/m',
         'long_name': 'SST Gradient in Y direction'
     }
 
     # Set global attributes
-    data_array.attrs = {
+    sst_gradient_ds.attrs = {
         'title': 'Sea Surface Temperature Gradients',
         'institution': 'Imperial College London',
         'source': 'Derived from SST data',
