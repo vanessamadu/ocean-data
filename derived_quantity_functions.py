@@ -1,4 +1,5 @@
 import numpy as np
+import xarray as xr
 
 def cyclostrophic_correction(u, v, ug, vg, f_lookup):
 
@@ -42,3 +43,41 @@ def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.01, max_iterat
         u, v = u_new, v_new
     
     return u, v
+
+def sst_gradient(sst,output_directory):
+
+    sst_gradient_x = np.gradient(sst,axis=-1)
+    sst_gradient_y = np.gradient(sst,axis=-2)
+
+    # create data arrays
+    sst_gradient_x_da = xr.DataArray(sst_gradient_x,coords=sst.coords,dims=sst.dims,name='sst_gradient_x')
+    sst_gradient_y_da = xr.DataArray(sst_gradient_y,coords=sst.coords,dims=sst.dims,name= 'sst_gradient_y')
+
+    # create dataset
+    sst_gradient_ds = xr.Dataset(
+        {
+            'sst_gradient_x':sst_gradient_x_da,
+            'sst_gradient_y':sst_gradient_y_da
+        }
+    )
+
+    # set attributes for the gradient variables
+    sst_gradient_ds['sst_gradient_x'].attrs = {
+        'units': 'K/m',
+        'long_name': 'SST Gradient in X direction'
+    }
+    sst_gradient_ds['sst_gradient_y'].attrs = {
+        'units': 'K/m',
+        'long_name': 'SST Gradient in Y direction'
+    }
+
+    # Set global attributes
+    sst_gradient_ds.attrs = {
+        'title': 'Sea Surface Temperature Gradients',
+        'institution': 'Imperial College London',
+        'source': 'Derived from SST data',
+        'history': 'Created on ' + str(np.datetime64('today')),
+        'references': '[ADD REFERENCES]'
+    }
+    
+    sst_gradient_ds.to_netcdf(f'{output_directory}/derived_sst_gradients.nc')
