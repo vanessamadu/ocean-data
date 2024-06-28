@@ -35,7 +35,7 @@ def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.01, max_iterat
     u_old = u
     v_old = v
     norm_diff_old = np.sqrt(np.square(u_old) + np.square(v_old))
-
+    ii = 0
     for iteration in range(max_iterations):
         print(f"iteration: {iteration}")
 
@@ -44,15 +44,18 @@ def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.01, max_iterat
         diff_u = u_new - u_old
         diff_v = v_new - v_old
         norm_diff_new = np.sqrt(np.square(diff_u)+np.square(diff_v))
-        
-        flags = np.logical_and(norm_diff_new > tolerance, norm_diff_old>norm_diff_new)
-        print()
+        if ii >2:
+            flags = np.logical_and(norm_diff_new > tolerance, norm_diff_old>norm_diff_new)
         if not flags.all():
             print(f"Converged after {iteration} iterations")
             break
-        print(f"iteration did not converge: diff_u = {diff_u}, diff_v = {diff_v}")
+        if ii <=2:
+            print(f'initial iteration: {ii}')
+        else:
+            print(f"iteration did not converge: diff_u = {diff_u}, diff_v = {diff_v}")
         u_old, v_old = u_new, v_new
         norm_diff_old = norm_diff_new
+        ii+=1
     
     return u, v
 
