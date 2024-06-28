@@ -31,8 +31,9 @@ def cyclostrophic_correction(u, v, ug, vg, f_lookup):
 
 def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.01, max_iterations=100):
     # initialise
-    u_old = u,
+    u_old = u
     v_old = v
+
     norm_diff_old = np.sqrt(np.square(u_old) + np.square(v_old))
 
     for iteration in range(max_iterations):
