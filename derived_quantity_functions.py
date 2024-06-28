@@ -24,9 +24,9 @@ def cyclostrophic_correction(u, v, ug, vg, f_lookup,flags):
             u_dot_grad_u_x[:,ii,:]/=f
             u_dot_grad_u_y[:,ii,:]/=f
 
-    corrected_u = np.where(flags,ug - u_dot_grad_u_x)
-    corrected_v = np.where(flags,vg + u_dot_grad_u_y)
-    
+    corrected_u = np.where(flags,ug - u_dot_grad_u_x,u)
+    corrected_v = np.where(flags,vg + u_dot_grad_u_y,v)
+    print("corrections computed successfully")
     return corrected_u, corrected_v
 
 def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.01, max_iterations=100):
@@ -46,6 +46,7 @@ def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.01, max_iterat
         norm_diff_new = np.sqrt(np.square(diff_u)+np.square(diff_v))
         
         flags = (norm_diff_new > tolerance) and (norm_diff_old>norm_diff_new)
+        print()
         if not flags.all():
             print(f"Converged after {iteration} iterations")
             break
