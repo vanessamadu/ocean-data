@@ -1,7 +1,7 @@
 import numpy as np
 import xarray as xr
 
-def cyclostrophic_correction(u, v, ug, vg, f_lookup):
+def cyclostrophic_correction(u, v, ug, vg, f_lookup,flags):
 
     du_dx = np.gradient(u, 0.125,axis=-1)
     du_dy = np.gradient(u, 0.125,axis=-2)
@@ -24,32 +24,33 @@ def cyclostrophic_correction(u, v, ug, vg, f_lookup):
             u_dot_grad_u_x[:,ii,:]/=f
             u_dot_grad_u_y[:,ii,:]/=f
 
-    corrected_u = ug - u_dot_grad_u_x
-    corrected_v = vg + u_dot_grad_u_y
+    corrected_u = np.where(flags,ug - u_dot_grad_u_x)
+    corrected_v = np.where(flags,vg + u_dot_grad_u_y)
     
     return corrected_u, corrected_v
 
 def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.01, max_iterations=100):
     # initialise
+    flags = np.ones(u.dims)
     u_old = u
     v_old = v
-
     norm_diff_old = np.sqrt(np.square(u_old) + np.square(v_old))
 
     for iteration in range(max_iterations):
         print(f"iteration: {iteration}")
 
         # new iterates
-        u_new, v_new = cyclostrophic_correction(u_old,v_old,ug,vg,f_lookup)
+        u_new, v_new = cyclostrophic_correction(u_old,v_old,ug,vg,f_lookup,flags)
         diff_u = u_new - u_old
         diff_v = v_new - v_old
         norm_diff_new = np.sqrt(np.square(diff_u)+np.square(diff_v))
         
-        if (norm_diff_new < tolerance).all() or (norm_diff_old<norm_diff_new).all():
+        flags = (norm_diff_new > tolerance) and (norm_diff_old>norm_diff_new)
+        if not flags.all():
             print(f"Converged after {iteration} iterations")
             break
         print(f"iteration did not converge: diff_u = {diff_u}, diff_v = {diff_v}")
-        u, v = u_new, v_new
+        u_old, v_old = u_new, v_new
         norm_diff_old = norm_diff_new
     
     return u, v
