@@ -45,14 +45,13 @@ def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.01, max_iterat
         diff_v = v_new - v_old
         norm_diff_new = np.sqrt(np.square(diff_u)+np.square(diff_v))
         if ii >2:
-            flags = np.logical_and(norm_diff_new > tolerance, norm_diff_old>norm_diff_new)
-        if not flags.all():
+            flags = np.logical_and(norm_diff_new > tolerance,norm_diff_old>norm_diff_new)
+        print(flags)
+        print((np.ones(flags.shape)-flags).all())
+        if (np.ones(flags.shape)-flags).all():
             print(f"Converged after {iteration} iterations")
             break
-        if ii <=2:
-            print(f'initial iteration: {ii}')
-        else:
-            print(f"iteration did not converge: diff_u = {diff_u}, diff_v = {diff_v}")
+        #print(f"iteration did not converge: diff_u = {diff_u}, diff_v = {diff_v}")
         u_old, v_old = u_new, v_new
         norm_diff_old = norm_diff_new
         ii+=1
