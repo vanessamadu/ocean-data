@@ -45,7 +45,7 @@ def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.01, max_iterat
         diff_v = v_new - v_old
         norm_diff_new = np.sqrt(np.square(diff_u)+np.square(diff_v))
         
-        flags = (norm_diff_new > tolerance) and (norm_diff_old>norm_diff_new)
+        flags = np.logical_and(norm_diff_new > tolerance, norm_diff_old>norm_diff_new)
         print()
         if not flags.all():
             print(f"Converged after {iteration} iterations")
