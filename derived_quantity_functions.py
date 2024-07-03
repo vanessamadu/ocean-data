@@ -29,12 +29,13 @@ def cyclostrophic_correction(u, v, ug, vg, f_lookup,flags):
     print("corrections computed successfully")
     return corrected_u, corrected_v
 
-def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.01, max_iterations=100):
+def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.1, max_iterations=100):
     # initialise
     flags = np.ones(u.shape)
     u_old = u
     v_old = v
     norm_diff_old = np.sqrt(np.square(u_old) + np.square(v_old))
+    print(norm_diff_old)
     ii = 0
     for iteration in range(max_iterations):
         print(f"iteration: {iteration}")
@@ -44,10 +45,11 @@ def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.01, max_iterat
         diff_u = u_new - u_old
         diff_v = v_new - v_old
         norm_diff_new = np.sqrt(np.square(diff_u)+np.square(diff_v))
-        if ii >2:
+        print(norm_diff_old-norm_diff_new)
+        if ii >0:
             flags = np.logical_and(norm_diff_new > tolerance,norm_diff_old>norm_diff_new)
-        print(flags)
-        print((np.ones(flags.shape)-flags).all())
+        print(f"number of terms that have not converged:{int(np.sum(flags))}")
+
         if (np.ones(flags.shape)-flags).all():
             print(f"Converged after {iteration} iterations")
             break

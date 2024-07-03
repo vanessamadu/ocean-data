@@ -6,7 +6,6 @@ import os
 
 
 # scripts for accessing the Copernicus Python API to download data subsets
-
 def generate_daily_timestamps(start_date, end_date):
     return pd.date_range(start=start_date, end=end_date, freq='D').strftime('%Y-%m-%d 00:00:00').tolist()
 
@@ -115,7 +114,7 @@ elif toggle == 'long_wind':
     # West NA
     min_lon, max_lon = -83, -40 
     min_lat, max_lat = 0, 60
-    start_date, end_date = "2016-11-30 00:00:00", "2023-09-08 23:00:00"
+    start_date, end_date = "2020-04-25 00:00:00", "2023-09-08 23:00:00"
     output_filename = "Full_CMEMS_West_NA_wind_2012_2023.nc"
     timestamps = generate_daily_timestamps(start_date, end_date)
 
