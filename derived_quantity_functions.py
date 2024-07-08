@@ -60,6 +60,26 @@ def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.1, max_iterati
     
     return u, v
 
+#-------------------- SST GRADIENT HELPER FUNCTIONS -----------------------#
+
+def forward_difference(now,next,h):
+    '''
+    now:    SST at the current grid point
+    next:   SST at the next grid point
+    h:      grid space
+    '''
+    return (next-now)/h
+
+def backward_difference(now,prev,h):
+    '''
+    now:    SST at the current grid point
+    prev:   SST at the previous grid point
+    h:      grid space
+    '''
+    return (now-prev)/h
+
+
+
 def sst_gradient(sst,output_directory,output_filename):
 
     sst_gradient_x = np.gradient(sst,axis=-1)
