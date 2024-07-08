@@ -62,10 +62,10 @@ def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.1, max_iterati
 
 #-------------------- SST GRADIENT HELPER FUNCTIONS -----------------------#
 
-def forward_difference(now,next,h):
+def forward_difference(next,now,h):
     '''
-    now:    SST at the current grid point
     next:   SST at the next grid point
+    now:    SST at the current grid point
     h:      grid space
     '''
     return (next-now)/h
@@ -78,6 +78,23 @@ def backward_difference(now,prev,h):
     '''
     return (now-prev)/h
 
+def central_difference(next,prev,h):
+    '''
+    next:   SST at the next grid point
+    prev:   SST at the previous grid point
+    h:      grid space
+    '''
+    return (next-prev)/(2*h)
+
+def five_point_stencil(next,next_next,prev,prev_prev,h):
+    '''
+    next:       SST at the next grid point
+    next_next:  SST at the next grid point after `next`
+    prev:       SST at the previous grid point
+    prev:       SST at the previous grid point before `prev`
+    h:          grid space
+    '''
+    return (prev_prev-next_next+ 8*next - 8*prev)/(12*h)
 
 
 def sst_gradient(sst,output_directory,output_filename):
