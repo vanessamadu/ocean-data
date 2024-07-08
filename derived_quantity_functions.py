@@ -127,13 +127,10 @@ def near_boundary_point(SST_grad_array, points_array, point_indices, h):
 def internal_point(SST_grad_array, points_array, point_indices, h):
     pass
 
-
-
-
 def sst_gradient(sst,output_directory,output_filename):
 
-    sst_gradient_x = np.gradient(sst,axis=-1)
-    sst_gradient_y = np.gradient(sst,axis=-2)
+    sst_gradient_x = 'PLACEHOLDER'
+    sst_gradient_y = 'PLACEHOLDER'
 
     # create data arrays
     sst_gradient_x_da = xr.DataArray(sst_gradient_x,coords=sst.coords,dims=sst.dims,name='sst_gradient_x')
