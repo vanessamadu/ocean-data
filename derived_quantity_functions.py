@@ -60,29 +60,22 @@ def iterate_until_convergence(u, v, ug, vg, f_lookup, tolerance=0.1, max_iterati
     
     return u, v
 
-#-------------------- SST GRADIENT HELPER FUNCTIONS -----------------------#
+# -------------------- SST GRADIENT HELPER FUNCTIONS ----------------------- #
 
-def forward_difference(next,now,h):
+# ======== Differencing Functions ======== #
+def one_sided_difference(first,second,h):
     '''
-    next:   SST at the next grid point
-    now:    SST at the current grid point
-    h:      grid space
+    first:     SST at the first grid point
+    second:    SST at the second grid point
+    h:         grid space
     '''
-    return (next-now)/h
-
-def backward_difference(now,prev,h):
-    '''
-    now:    SST at the current grid point
-    prev:   SST at the previous grid point
-    h:      grid space
-    '''
-    return (now-prev)/h
+    return (second-first)/h
 
 def central_difference(next,prev,h):
     '''
     next:   SST at the next grid point
     prev:   SST at the previous grid point
-    h:      grid space
+    h:      grid spacing
     '''
     return (next-prev)/(2*h)
 
@@ -92,9 +85,49 @@ def five_point_stencil(next,next_next,prev,prev_prev,h):
     next_next:  SST at the next grid point after `next`
     prev:       SST at the previous grid point
     prev:       SST at the previous grid point before `prev`
-    h:          grid space
+    h:          grid spacing
     '''
     return (prev_prev-next_next+ 8*next - 8*prev)/(12*h)
+
+# ======= other ======= #
+
+def screening_for_nans(points_array):
+   '''
+   points_array:   one dimensional array of SST values
+
+   returns: True with indices if nans are present, returns False with an empty list otherwise
+   '''
+   nans = np.isnan(points_array)
+   nan_positions = np.where(nans)[0]
+   return nans.any(), nan_positions
+
+# ====== assigning values ====== #
+#####   THIS SHOULD PROBABLY BE A METHOD FOR SST_GRADIENT ARRAYS
+
+def boundary_point(SST_grad_array, points_array, point_indices, h):
+    '''
+    SST_grad_array:     array containing the SST gradients in one spatial dimension
+    point_array:        one dimensional array of two SST values (increasing position indices)
+    point_indices:      indices of the current grid point
+    h:                  grid spacing
+    '''
+    nans_screening = screening_for_nans(points_array)
+    if not nans_screening[0]:
+        # if no nans
+        first,second = points_array
+        new_val = one_sided_difference(second,first,h)
+    else:
+        new_val = np.nan
+    
+    SST_grad_array[point_indices] = new_val
+
+def near_boundary_point(SST_grad_array, points_array, point_indices, h):
+    pass
+
+def internal_point(SST_grad_array, points_array, point_indices, h):
+    pass
+
+
 
 
 def sst_gradient(sst,output_directory,output_filename):
