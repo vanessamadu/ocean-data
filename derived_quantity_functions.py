@@ -99,7 +99,46 @@ def screening_for_nans(points_array):
    '''
    nans = np.isnan(points_array)
    nan_positions = np.where(nans)[0]
-   return nans.any(), nan_positions
+   return nans, nan_positions
+
+def domain_iteration(SST_array):
+
+    # metadata
+    h = 0.05
+    lat,lon = SST_array.indexes.values()
+
+    # initialisation
+    SST_grad_array = np.zeros(SST_array.shape)
+    SST_grad_array.fill(np.nan)
+
+    for ii in range(len(lat)):
+        for jj in range(2,len(lon[:-5])):
+            # finding nan values
+            points_array = SST_array.isel(latitude = jj,longitude = range(ii,ii+5)).values
+            nans,nan_positions = screening_for_nans(np.array(points_array))
+
+            # sweep for land masses
+            if np.sum(nans)<4: #if there are less than four nans
+                # try five point stencil
+                if not nans[0,1,3,4].all():
+                    next,next_next,prev,prev_prev = points_array[0,1,3,4]
+                    SST_grad_array[ii,jj] = five_point_stencil(next,next_next,prev,prev_prev,h)
+
+                # else try central difference
+                # else try one-sided difference
+                SST_grad_array[ii,jj] = np.mean(points_array) # TEST
+        print(f"lat:{lat[ii]} complete")
+
+    return SST_grad_array
+
+
+
+
+
+
+
+
+
 
 # ====== assigning values ====== #
 #####   THIS SHOULD PROBABLY BE A METHOD FOR SST_GRADIENT ARRAYS
