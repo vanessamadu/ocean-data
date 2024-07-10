@@ -98,8 +98,7 @@ def screening_for_nans(points_array):
    returns: True with indices if nans are present, returns False with an empty list otherwise
    '''
    nans = np.isnan(points_array)
-   nan_positions = np.where(nans)[0]
-   return nans, nan_positions
+   return nans
 
 def domain_iteration(SST_array):
 
@@ -111,22 +110,30 @@ def domain_iteration(SST_array):
     SST_grad_array = np.zeros(SST_array.shape)
     SST_grad_array.fill(np.nan)
 
-    for ii in range(len(lat)):
-        for jj in range(2,len(lon[:-5])):
+    for ii in range(len([1,2,3,4,5])):
+        for jj in range(2,len(lon[:-2])):
             # finding nan values
-            points_array = SST_array.isel(latitude = jj,longitude = range(ii,ii+5)).values
-            nans,nan_positions = screening_for_nans(np.array(points_array))
+            points_array = SST_array.isel(latitude = ii,longitude = range(jj-2,jj+2)).values
+            nans = screening_for_nans(np.array(points_array))
 
             # sweep for land masses
             if np.sum(nans)<4: #if there are less than four nans
                 # try five point stencil
-                if not nans[0,1,3,4].all():
-                    next,next_next,prev,prev_prev = points_array[0,1,3,4]
+                if not nans[[0,1,3,4]].all():
+                    prev_prev,prev,next,next_next = points_array[[0,1,3,4]]
                     SST_grad_array[ii,jj] = five_point_stencil(next,next_next,prev,prev_prev,h)
-
-                # else try central difference
-                # else try one-sided difference
-                SST_grad_array[ii,jj] = np.mean(points_array) # TEST
+                # try central difference
+                elif not nans[[1,3]].all():
+                    prev,next = points_array[[1,3]]
+                    SST_grad_array[ii,jj] = central_difference(next,prev,h)
+                # try forward difference
+                elif not nans[[2,3]].all():
+                    first,second = points_array[[2,3]]
+                    SST_grad_array[ii,jj] = one_sided_difference(first,second,h)
+                elif not nans[[1,2]].all():
+                    first,second = points_array[[1,2]]
+                    SST_grad_array[ii,jj] = one_sided_difference(first,second,h)
+      
         print(f"lat:{lat[ii]} complete")
 
     return SST_grad_array
