@@ -113,7 +113,7 @@ def domain_iteration(SST_array):
     for ii in range(len([1,2,3,4,5])):
         for jj in range(2,len(lon[:-2])):
             # finding nan values
-            points_array = SST_array.isel(latitude = ii,longitude = range(jj-2,jj+2)).values
+            points_array = SST_array.isel(latitude = ii,longitude = range(jj-2,jj+3)).values
             nans = screening_for_nans(np.array(points_array))
 
             # sweep for land masses
