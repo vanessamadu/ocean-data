@@ -100,7 +100,7 @@ def screening_for_nans(points_array):
    nans = np.isnan(points_array)
    return nans
 
-def domain_iteration(SST_array):
+def x_sst_derivative(SST_array):
 
     # metadata
     h = 0.05
@@ -110,7 +110,56 @@ def domain_iteration(SST_array):
     SST_grad_array = np.zeros(SST_array.shape)
     SST_grad_array.fill(np.nan)
 
-    for ii in range(len([1,2,3,4,5])):
+    for ii in range(len(lat)):
+        ###### boundaries
+
+        # western boundary
+        points_array = SST_array.isel(latitude = ii,longitude = [0,1]).values
+        nans = screening_for_nans(np.array(points_array))
+        if np.sum(nans)==0:
+            first,second = points_array[[0,1]]
+            SST_grad_array[ii,0] = one_sided_difference(first,second,h)
+        # eastern boundary
+        points_array = SST_array.isel(latitude = ii,longitude = [len(lon)-2,len(lon)-1]).values
+        nans = screening_for_nans(np.array(points_array))
+        if np.sum(nans)==0:
+            first,second = points_array[[0,1]]
+            SST_grad_array[ii,len(lon)-1] = one_sided_difference(first,second,h)
+
+        ###### near boundaries
+
+        # western near boundary
+        points_array = SST_array.isel(latitude = ii,longitude = [0,1,2]).values
+        nans = screening_for_nans(np.array(points_array))
+        if not nans[[0,2]].all():
+            # central difference
+            prev,next = points_array[[0,2]]
+            SST_grad_array[ii,1] = central_difference(next,prev,h)
+        elif not nans[[0,1]].all():
+            # backwards difference
+            first,second = points_array[[0,1]]
+            SST_grad_array[ii,1] = one_sided_difference(first,second,h)
+        elif not nans[[1,2]].all():
+            # backwards difference
+            first,second = points_array[[1,2]]
+            SST_grad_array[ii,1] = one_sided_difference(first,second,h)
+
+        # eastern near boundary
+        points_array = SST_array.isel(latitude = ii,longitude = [len(lon)-3,len(lon)-2,len(lon)-1]).values
+        nans = screening_for_nans(np.array(points_array))
+        if not nans[[0,2]].all():
+            # central difference
+            prev,next = points_array[[0,2]]
+            SST_grad_array[ii,len(lon)-2] = central_difference(next,prev,h)
+        elif not nans[[0,1]].all():
+            # backwards difference
+            first,second = points_array[[0,1]]
+            SST_grad_array[ii,len(lon)-2] = one_sided_difference(first,second,h)
+        elif not nans[[1,2]].all():
+            # backwards difference
+            first,second = points_array[[1,2]]
+            SST_grad_array[ii,len(lon)-2] = one_sided_difference(first,second,h)
+
         for jj in range(2,len(lon[:-2])):
             # finding nan values
             points_array = SST_array.isel(latitude = ii,longitude = range(jj-2,jj+3)).values
@@ -138,55 +187,20 @@ def domain_iteration(SST_array):
 
     return SST_grad_array
 
-
-
-
-
-
-
-
-
-
-# ====== assigning values ====== #
-#####   THIS SHOULD PROBABLY BE A METHOD FOR SST_GRADIENT ARRAYS
-
-def boundary_point(SST_grad_array, points_array, point_indices, h):
-    '''
-    SST_grad_array:     array containing the SST gradients in one spatial dimension
-    point_array:        one dimensional array of two SST values (increasing position indices)
-    point_indices:      indices of the current grid point
-    h:                  grid spacing
-    '''
-    nans_screening = screening_for_nans(points_array)
-    if not nans_screening[0]:
-        # if no nans
-        first,second = points_array
-        new_val = one_sided_difference(second,first,h)
-    else:
-        new_val = np.nan
-    
-    SST_grad_array[point_indices] = new_val
-
-def near_boundary_point(SST_grad_array, points_array, point_indices, h):
-    pass
-
-def internal_point(SST_grad_array, points_array, point_indices, h):
-    pass
-
 def sst_gradient(sst,output_directory,output_filename):
 
-    sst_gradient_x = 'PLACEHOLDER'
-    sst_gradient_y = 'PLACEHOLDER'
+    sst_gradient_x = x_sst_derivative(sst)
+    #sst_gradient_y = 'PLACEHOLDER'
 
     # create data arrays
     sst_gradient_x_da = xr.DataArray(sst_gradient_x,coords=sst.coords,dims=sst.dims,name='sst_gradient_x')
-    sst_gradient_y_da = xr.DataArray(sst_gradient_y,coords=sst.coords,dims=sst.dims,name= 'sst_gradient_y')
+    #sst_gradient_y_da = xr.DataArray(sst_gradient_y,coords=sst.coords,dims=sst.dims,name= 'sst_gradient_y')
 
     # create dataset
     sst_gradient_ds = xr.Dataset(
         {
             'sst_gradient_x':sst_gradient_x_da,
-            'sst_gradient_y':sst_gradient_y_da
+            #'sst_gradient_y':sst_gradient_y_da
         }
     )
 
@@ -195,10 +209,10 @@ def sst_gradient(sst,output_directory,output_filename):
         'units': 'K/m',
         'long_name': 'SST Gradient in X direction'
     }
-    sst_gradient_ds['sst_gradient_y'].attrs = {
-        'units': 'K/m',
-        'long_name': 'SST Gradient in Y direction'
-    }
+    #sst_gradient_ds['sst_gradient_y'].attrs = {
+     #   'units': 'K/m',
+      #  'long_name': 'SST Gradient in Y direction'
+    #}
 
     # Set global attributes
     sst_gradient_ds.attrs = {
