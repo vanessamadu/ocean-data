@@ -1,50 +1,41 @@
+from astropy.convolution import convolve
 import numpy as np
-import xarray as xr
+from scipy.ndimage import convolve1d
 
-# ======== Differencing Functions ======== #
-def one_sided_difference(first,second,h):
-    '''
-    first:     SST at the first grid point
-    second:    SST at the second grid point
-    h:         grid space
-    '''
-    return (second-first)/h
+def stencil_mask(x,kernel_len):
+    nans = np.isnan(x)
+    mask = np.nan*np.ones(len(x))
+    num_neighbours = int(np.floor(kernel_len/2))
+    for ii in range(num_neighbours,len(nans)-num_neighbours):
+        indices = [val for val in range(ii-num_neighbours,ii+num_neighbours+1)]
+        indices.pop(num_neighbours)
+        stencil_is_valid = np.array(not nans[indices].any())
+        if stencil_is_valid:
+            mask[ii] = stencil_is_valid
+    return mask
 
-def central_difference(next,prev,h):
-    '''
-    next:   SST at the next grid point
-    prev:   SST at the previous grid point
-    h:      grid spacing
-    '''
-    return (next-prev)/(2*h)
+# len(x) >= 5
+x = np.array([1.0,2.0,4.0,5.0,7.0,np.nan,3.0,6.0])
+# define kernels
+kernel_stencil = np.array([1/12,-8/12,0, 8/12,-1/12])[::-1]
+kernel_central = np.array([-0.5,0,0.5])[::-1]
+kernel_onesided = np.array([-1.0,1.0])[::-1]
+# evaluate derivatives
+dx_stencil = stencil_mask(x,len(kernel_stencil))*convolve(x,kernel_stencil,normalize_kernel=False,nan_treatment='fill',boundary=None,
+                      mask=np.isnan(x))
+dx_central = stencil_mask(x,len(kernel_central))*convolve(x,kernel_central,normalize_kernel=False,nan_treatment='fill',boundary=None,
+                      mask=np.isnan(x))
+dx_right = convolve1d(x,kernel_onesided,mode="constant",cval=np.nan)
+dx_left = np.roll(dx_right,shift=1,axis=0)
 
-def five_point_stencil(next,next_next,prev,prev_prev,h):
-    '''
-    next:       SST at the next grid point
-    next_next:  SST at the next grid point after `next`
-    prev:       SST at the previous grid point
-    prev:       SST at the previous grid point before `prev`
-    h:          grid spacing
-    '''
-    return (prev_prev-next_next+ 8*next - 8*prev)/(12*h)
+print(f"x: {x}")
+print(f"dx_stencil: {dx_stencil}")
+print(f"dx_central: {dx_central}")
+print(f"dx_left: {dx_left}")
+print(f"dx_right: {dx_right}")
 
-# ========== Boundary Differencing ========== #
-def boundary_difference(boundary,h,SST_array,N,ii):
-    if boundary == "W" or boundary == "S":
-        index_array = [0,1]
-        ii = 0
-    elif boundary == "E" or boundary == "N":
-        index_array = [N-2,N-1]
-        ii = N-1
-    # assigned values to points array:
-    if boundary == "N" or boundary == "S":
-        points_array = SST_array.isel(latitude = index_array,longitude = ii).values
-    elif boundary == "E" or boundary == "W":
-        points_array = SST_array.isel(latitude = ii,longitude = index_array).values
-    # 
-    nans = np.isnan(np.array(points_array))
-    if np.sum(nans)==0:
-        first,second = points_array[index_array]
-    
-    return one_sided_difference(first,second,h)
-    
+dx = np.where(np.isnan(dx_stencil),dx_central,dx_stencil)
+dx = np.where(np.isnan(dx),dx_left,dx)
+dx = np.where(np.isnan(dx),dx_right,dx)
+
+print(dx)
