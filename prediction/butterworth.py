@@ -47,8 +47,8 @@ def butterworth_filter(time_series: np.ndarray, latitude: np.ndarray, order: int
     Returns:
     - A 2D numpy array of the same shape as the input array, with filtered data.
     """
-    time_series_len = time_series.shape(0)
-    num_time_series = time_series.shape(1)
+    time_series_len = time_series.shape[0]
+    num_time_series = time_series.shape[1]
     dtype = time_series.dtype
     # initialise output with same shape and dtype as input
     out = np.zeros(time_series.shape,dtype=dtype) 
@@ -72,12 +72,12 @@ def butterworth_filter(time_series: np.ndarray, latitude: np.ndarray, order: int
             inertial_freq = 2*earth_rotation_rate*np.sin(np.deg2rad(np.abs(average_24_hour_lat)))
             inertial_freq_hz = inertial_freq/(2*np.pi)
             five_day_freq_hz = 1 / (5 * 24 * 60 ** 2)
-            threshold_freq = np.min(inertial_freq_hz/1.5, five_day_freq_hz) 
+            threshold_freq = np.max([inertial_freq_hz/1.5, five_day_freq_hz]) 
 
             b,a = signal.butter(order,threshold_freq/nyquist_freq,btype='lowpass',analog=False)
             for jj in range(num_time_series):
                 filtered_time_series = signal.filtfilt(b,a,time_series[:,jj])
-                out[ii:(ii+4),jj] = filtered_time_series[ii:(ii+4),jj]
+                out[ii:(ii+4),jj] = filtered_time_series[ii:(ii+4)]
             out[nan_mask] = np.nan
     
     return out
@@ -121,7 +121,7 @@ if __name__ == '__main__':
     dataset['v']/=100**2
 
     # set extreme values to NaN
-    for var in ['Tw','Tx','Wy','Wx']:
+    for var in ['Tx','Ty','Wy','Wx']:
         extreme_val_mask = dataset[var] < -900
         dataset.loc[extreme_val_mask,var] = np.nan
 
