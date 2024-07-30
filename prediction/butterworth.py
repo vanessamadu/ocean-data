@@ -16,7 +16,6 @@ Version: 1.0
 import numpy as np
 import pandas as pd
 from scipy import signal
-import probdrift.oceanfns as ofn
 
 def identify_time_series_segments(timevec:pd.Series,cut_off: int = 6) -> np.ndarray:
     """
@@ -68,7 +67,13 @@ def butterworth_filter(time_series: np.ndarray, latitude: np.ndarray, order: int
         # perform daily filtering (moving BW filter over four six hourly observations)
         for ii in range(0,time_series_len,4):
             average_24_hour_lat = np.mean(latitude[ii:(ii+4)])
-            threshold_freq = ofn.get_cut_off(average_24_hour_lat)
+            # threshold frequency = minimum of intertial frequency/1.5 and once every five days
+            earth_rotation_rate = 7.2921e-5
+            inertial_freq = 2*earth_rotation_rate*np.sin(np.deg2rad(np.abs(average_24_hour_lat)))
+            inertial_freq_hz = inertial_freq/(2*np.pi)
+            five_day_freq_hz = 1 / (5 * 24 * 60 ** 2)
+            threshold_freq = np.min(inertial_freq_hz/1.5, five_day_freq_hz) 
+
             b,a = signal.butter(order,threshold_freq/nyquist_freq,btype='lowpass',analog=False)
             for jj in range(num_time_series):
                 filtered_time_series = signal.filtfilt(b,a,time_series[:,jj])
@@ -107,3 +112,7 @@ def filter_covariates(df: pd.DataFrame) -> pd.DataFrame:
     df[vars_to_filter] = filtered_vars
     return df
 
+# ---------- FILTER SCRIPT ----------- #
+
+if __name__ == '__main__':
+    drifter_data = pd.read_hdf('drifter_full.h5')
