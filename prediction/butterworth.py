@@ -77,3 +77,33 @@ def butterworth_filter(time_series: np.ndarray, latitude: np.ndarray, order: int
     
     return out
             
+def filter_covariates(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Applies the butterworth_filter function to each covariate column in the DataFrame.
+
+    This function filters the 'u', 'v', 'Wx', 'Wy', 'Tx', and 'Ty' columns of the DataFrame,
+    creating copies if they do not already exist, and replacing the filtered values back
+    into the DataFrame.
+
+    Parameters:
+    - df: A pandas DataFrame containing the data to be filtered. The DataFrame must contain
+          a 'lat' column and the columns specified in cols_to_filter.
+
+    Returns:
+    - A pandas DataFrame with the filtered data.
+    """
+    lat = df['lat'].values
+    time_dependent_vars = ['u','v','Wx','Wy','Tx','Ty']
+
+    # prevent changes to the data outside of this function
+    for var in time_dependent_vars:
+        if var + '_filtered' not in df.columns:
+            df[var + '_filtered'] = df[var].copy()
+    
+    vars_to_filter = [var + '_filtered' for var in time_dependent_vars]
+    time_series = df[vars_to_filter].values
+    filtered_vars = butterworth_filter(time_series,lat)
+
+    df[vars_to_filter] = filtered_vars
+    return df
+
