@@ -99,7 +99,14 @@ def filter_covariates(df: pd.DataFrame) -> pd.DataFrame:
     - A pandas DataFrame with the filtered data.
     """
     lat = df['lat'].values
-    vars_to_filter = ['u','v','Wx','Wy','Tx','Ty']
+    time_dependent_vars = ['u','v','Wx','Wy','Tx','Ty']
+
+    # prevent changes to the data outside of this function
+    for var in time_dependent_vars:
+        if var + '_filtered' not in df.columns:
+            df[var + '_filtered'] = df[var].copy()
+    
+    vars_to_filter = [var + '_filtered' for var in time_dependent_vars]
     time_series = df[vars_to_filter].values
     filtered_vars = butterworth_filter(time_series,lat)
 
@@ -111,19 +118,19 @@ def filter_covariates(df: pd.DataFrame) -> pd.DataFrame:
 def main():
     start_time = time.time()
     print('starting data processing')
-    raw_dataset = pd.read_hdf('drifter_full.h5')
-    dataset = raw_dataset.copy()
+    dataset = pd.read_hdf('drifter_full.h5')
+
     print('data loaded successfully')
     # convert from cm/s -> m/s and then divide by another 100 to correct the initial processing that
     # multiplied cm/s by 100 to get m/s...
 
     #using a small subset of the data for testing
     frac = 0.0005
-    print(f'sampling 0.01% of the dataset')
+    print(f'sampling {frac*100}% of the dataset')
     dataset = dataset.sample(frac=frac, random_state=42)
-    print(f'new dataset side: {dataset.shape}')
-    dataset['u']/=100**2
-    dataset['v']/=100**2
+    print(f'new dataset shape: {dataset.shape}')
+    dataset.loc[:, 'u']/=100**2
+    dataset.loc[:, 'v']/=100**2
 
     # set extreme values to NaN
     for var in ['u','v','Tx','Ty','Wy','Wx']:
@@ -133,7 +140,7 @@ def main():
     # discard observations with lat/lon variance estimate >= 0.5 degrees
     dataset = dataset.query('lon_var<0.5 and lat_var<0.5')
     # group the data for each drifter id into time series segments 
-    dataset['segment_id'] = dataset.groupby('id')['time'].transform(identify_time_series_segments)
+    dataset.loc[:,'segment_id'] = dataset.groupby('id').loc['time'].transform(identify_time_series_segments)
     filtered_dataset = dataset.groupby(['id', 'segment_id'], group_keys=False).apply(filter_covariates, include_groups=False)
     print('applied Butterworth filter to each segment')
     filtered_dataset.to_hdf(path_or_buf="filtered_data_test.h5", key="drifter", mode='w')
