@@ -16,6 +16,8 @@ Version: 1.0
 import numpy as np
 import pandas as pd
 from scipy import signal
+# for info
+import logging
 
 def identify_time_series_segments(timevec:pd.Series,cut_off: int = 6) -> np.ndarray:
     """
@@ -114,23 +116,34 @@ def filter_covariates(df: pd.DataFrame) -> pd.DataFrame:
 
 # ---------- FILTER SCRIPT ----------- #
 if __name__ == '__main__':
+    print('starting data processing')
     dataset = pd.read_hdf('drifter_full.h5')
+
+    print('data loaded successfully')
     # convert from cm/s -> m/s and then divide by another 100 to correct the initial processing that
     # multiplied cm/s by 100 to get m/s...
+
+    #using a small subset of the data for testing
+    print(f'sampling 0.01% of the dataset')
+    dataset = dataset.sample(frac=0.0001, random_state=42)
+    print(f'new dataset side: {dataset.shape}')
     dataset['u']/=100**2
     dataset['v']/=100**2
 
     # set extreme values to NaN
-    for var in ['Tx','Ty','Wy','Wx']:
+    for var in ['u','v','Tx','Ty','Wy','Wx']:
         extreme_val_mask = dataset[var] < -900
         dataset.loc[extreme_val_mask,var] = np.nan
 
     # discard observations with lat/lon variance estimate >= 0.5 degrees
     dataset = dataset.query('lon_var<0.5 and lat_var<0.5')
     # group the data for each drifter id into time series segments 
-    dataset['segment_id'] = dataset[['time','id']].groupby('id')['time'].transform(identify_time_series_segments)
-    vars_to_filter = ['u','v','Wx','Wy','Tx','Ty']
-    filtered_dataset = dataset.groupby(['id','segment_id']).apply(filter_covariates)
-    filtered_dataset.to_hdf("filtered_data","drifter",mode='w')
+    dataset['segment_id'] = dataset.groupby('id')['time'].transform(identify_time_series_segments)
+
+
+    filtered_dataset = dataset.groupby(['id', 'segment_id'], group_keys=False, include_groups=False).apply(filter_covariates)
+    print('Applied Butterworth filter to each segment')
+    filtered_dataset.to_hdf(path_or_buf="filtered_data_test.h5", key="drifter", mode='w')
+    print('saved filtered data')
 
 
